@@ -1,6 +1,6 @@
 {
   "name": "url-registry",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "anonyous content validated url registry",
   "main": "src/url-registry.js",
   "scripts": {

@@ -151,6 +151,7 @@ const _isURL = url => {
     || href.startsWith('localhost')
     || href.includes('//127.0.0.1') || href.includes('//0.0.0.0')
     || href.includes('//10.0.0') || href.includes('//192.168')
+    || href.includes('//172.')
     if (islocalhost) return
     return true
   }
@@ -198,6 +199,10 @@ async function registry (name, validate, ttl = default_ttl) {
       resolve(validkv[url])
     }),
     put: async (url, value = '{}', cache = true) => new Promise((resolve, reject) => {
+      if (!_isURL(location.href)) {
+        console.error('not allowed to publish from `location.origin`', location.href)
+        return reject(new Error('`location.href` must be a valid fully specified non-localhost absolute url'))
+      }
       if (!_isURL(url)) {
         console.error('invalid url - [put] `url`', url)
         return reject(new Error('`url` must be a valid fully specified non-localhost absolute url'))
@@ -278,7 +283,7 @@ async function registry (name, validate, ttl = default_ttl) {
         } catch (e) {
           json = {}
         }
-        const isPublicURL = true // @TODO: fix back to: _isURL(meta.url)
+        const isPublicURL = _isURL(meta.url)
         const isvalid = isPublicURL && validate(json, meta)
         if (isvalid) valid.push({ data: json, meta })
         else invalid.push({ data: json, meta })
