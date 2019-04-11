@@ -1,0 +1,24 @@
+{
+  "name": "url-registry",
+  "version": "0.0.0",
+  "description": "anonyous content validated url registry",
+  "main": "src/url-registry.js",
+  "scripts": {
+    "start": "budo demo/demo.js:bundle.js --title $npm_package_name --force-default-index --open --live --ssl",
+    "build": "browserify --full-paths demo/demo.js > bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serapath/url-registry.git"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/serapath/url-registry/issues"
+  },
+  "homepage": "https://github.com/serapath/url-registry#readme",
+  "devDependencies": {
+    "budo": "^11.6.0"
+  }
+}
